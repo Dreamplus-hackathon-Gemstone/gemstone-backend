@@ -1,8 +1,6 @@
 package domain
 
-import "gorm.io/gorm"
-
-type Genre struct {
-	gorm.Model `json:"gorm_._model"`
-	GenreType  string `json:"name,omitempty" gorm:"foreignKey:GenreType;references:GenreType;constraint:OnUpdate:CASCADE,OnDelete:CASCADE;"`
+type Genres struct {
+	ID        uint   `gorm:"primaryKey;autoIncrement;index;"`
+	GenreType string `json:"name,omitempty" gorm:"foreignKey:GenreType;references:GenreType;constraint:OnUpdate:CASCADE,OnDelete:CASCADE;"`
 }

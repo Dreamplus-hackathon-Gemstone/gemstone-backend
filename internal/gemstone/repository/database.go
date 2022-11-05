@@ -87,10 +87,31 @@ func NewClient(config *config.Config) *gorm.DB {
 	if err != nil {
 		log.Panicf("Panic occured while opening postgresql client\n")
 	}
-	_ = client.Migrator().CreateTable(&domain.Genre{})
-	_ = client.Migrator().CreateTable(&domain.Proposal{})
-	_ = client.Migrator().CreateTable(&domain.Miner{})
-	_ = client.Migrator().CreateTable(&domain.Maker{})
-	_ = client.Migrator().CreateTable(&domain.Token{})
+
+	_ = client.Migrator().DropTable(&domain.Genres{})
+	_ = client.Migrator().DropTable(&domain.Proposals{})
+	_ = client.Migrator().DropTable(&domain.Miners{})
+	_ = client.Migrator().DropTable(&domain.Makers{})
+	_ = client.Migrator().DropTable(&domain.Tokens{})
+	_ = client.Migrator().DropTable(&domain.Movie{})
+	_ = client.Migrator().DropTable(&domain.MovieMiners{})
+	_ = client.Migrator().DropTable(&domain.ProposalMiners{})
+
+	err = client.Migrator().CreateTable(&domain.Genres{})
+	log.Printf("Create table Genres ... err : %v\n", err)
+	err = client.Migrator().CreateTable(&domain.Tokens{})
+	log.Printf("Create table Tokens ... err : %v\n", err)
+	err = client.Migrator().CreateTable(&domain.Miners{})
+	log.Printf("Create table Miners ... err : %v\n", err)
+	err = client.Migrator().CreateTable(&domain.Makers{})
+	log.Printf("Create table Makers ... err : %v\n", err)
+	err = client.Migrator().CreateTable(&domain.Movie{})
+	log.Printf("Create table Movie ... err : %v\n", err)
+	err = client.Migrator().CreateTable(&domain.Proposals{})
+	log.Printf("Create table Proposals ... err : %v\n", err)
+	err = client.Migrator().CreateTable(&domain.MovieMiners{})
+	log.Printf("Create table MovieMiners ... err : %v\n", err)
+	err = client.Migrator().CreateTable(&domain.ProposalMiners{})
+	log.Printf("Create table ProposalMiners ... err : %v\n", err)
 	return client
 }

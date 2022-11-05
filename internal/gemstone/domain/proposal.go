@@ -1,22 +1,28 @@
 package domain
 
 import (
-	"gorm.io/gorm"
 	"time"
 )
 
-type Proposal struct {
-	gorm.Model              `json:"gorm_._model"`
+type Proposals struct {
+	ID                      uint          `gorm:"primaryKey;autoIncrement;index;"`
 	ContentID               string        `json:"content_id,omitempty"`
 	ThumbnailURI            string        `json:"thumbnail_uri,omitempty"`
 	DocumentURI             string        `json:"document_uri,omitempty"`
 	GenreType               string        `json:"genre_type,omitempty"`
 	Title                   string        `json:"title,omitempty"`
-	Proposer                string        `json:"proposer,omitempty"`
+	Nickname                string        `json:"name,omitempty"`
 	Description             string        `json:"description,omitempty"`
 	TargetPrice             uint64        `json:"target_price,omitempty"`
 	Deadline                time.Time     `json:"deadline"`
 	ExpectedReleaseYear     time.Time     `json:"expected_release_year"`
 	EstimatedProductionTime time.Duration `json:"estimated_production_time,omitempty"`
-	Miners                  []*Miner      `json:"miners" gorm:"foreignKey:ProposalID;references:ID;constraint:OnUpdate:CASCADE,OnDelete:CASCADE"`
+	Miners                  []*Miners     `json:"miners" gorm:"many2many:proposal_miners;"`
+	CreatedAt               time.Time     `gorm:"autoCreateTime:nano" json:"created_at"`
+	UpdatedAt               time.Time     `gorm:"autoUpdateTime" json:"updated_at"`
+}
+
+type ProposalMiners struct {
+	ProposalsID uint `json:"proposal_id,omitempty"`
+	MinersID    uint `json:"miner_id,omitempty"`
 }
