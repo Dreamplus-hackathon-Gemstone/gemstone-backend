@@ -1,11 +1,11 @@
 package gemstone
 
-type (
-	//App ...
-	App struct {
-	}
-)
+import "github.com/gofiber/fiber/v2"
 
-func NewGemStoneApp() *App {
-	return &App{}
+type App struct {
+	Router *fiber.App
+}
+
+func NewGemStoneApp(router *fiber.App) *App {
+	return &App{Router: router}
 }
