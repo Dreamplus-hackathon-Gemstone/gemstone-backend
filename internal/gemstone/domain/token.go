@@ -1,9 +1,10 @@
 package domain
 
-import "gorm.io/gorm"
+import "time"
 
 type Token struct {
-	gorm.Model
-	tokenID  string
-	tokenURI string
+	TokenID   string    `json:"token_id,omitempty" gorm:"primaryKey;autoIncrement:false"`
+	TokenURI  string    `json:"token_uri,omitempty"`
+	CreatedAt time.Time `gorm:"not_null"`
+	UpdatedAt time.Time `gorm:"not_null"`
 }

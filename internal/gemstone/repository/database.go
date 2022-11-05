@@ -87,20 +87,10 @@ func NewClient(config *config.Config) *gorm.DB {
 	if err != nil {
 		log.Panicf("Panic occured while opening postgresql client\n")
 	}
-	if err := client.Migrator().CreateTable(&domain.Category{}); err != nil {
-		log.Panicf("Panic occured while creating table : %v\n", err)
-	}
-	if err := client.Migrator().CreateTable(&domain.Item{}); err != nil {
-		log.Panicf("Panic occured while creating table : %v\n", err)
-	}
-	if err := client.Migrator().CreateTable(&domain.Miner{}); err != nil {
-		log.Panicf("Panic occured while creating table : %v\n", err)
-	}
-	if err := client.Migrator().CreateTable(&domain.Maker{}); err != nil {
-		log.Panicf("Panic occured while creating table : %v\n", err)
-	}
-	if err := client.Migrator().CreateTable(&domain.Token{}); err != nil {
-		log.Panicf("Panic occured while creating table : %v\n", err)
-	}
+	_ = client.Migrator().CreateTable(&domain.Genre{})
+	_ = client.Migrator().CreateTable(&domain.Proposal{})
+	_ = client.Migrator().CreateTable(&domain.Miner{})
+	_ = client.Migrator().CreateTable(&domain.Maker{})
+	_ = client.Migrator().CreateTable(&domain.Token{})
 	return client
 }
