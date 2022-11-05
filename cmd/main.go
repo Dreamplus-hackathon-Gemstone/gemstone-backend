@@ -2,12 +2,19 @@ package main
 
 import (
 	"fmt"
-	"gemstone-backend/internal/app"
+	"gemstone-backend/internal/gemstone"
+	"gemstone-backend/internal/gemstone/config"
+	"log"
 )
 
 func main() {
 	fmt.Println("Gemstone app start")
 
-	app := app.NewGemStoneApp()
-	app.Run()
+	gemStoneApp := gemstone.NewGemStoneApp()
+	if err := config.LoadEnv(); err != nil {
+		log.Panicf("Panic occured while loading environment")
+	}
+	config := config.NewConfig()
+
+	//gemStoneApp.Run()
 }
