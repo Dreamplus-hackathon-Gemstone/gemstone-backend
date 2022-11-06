@@ -6,12 +6,12 @@ import (
 
 type Proposals struct {
 	ID                      uint          `gorm:"primaryKey;autoIncrement;index;"`
+	GenreID                 uint          `json:"genre_id,omitempty"`
+	MakerID                 uint          `json:"maker_id,omitempty"`
 	ContentID               string        `json:"content_id,omitempty"`
 	ThumbnailURI            string        `json:"thumbnail_uri,omitempty"`
 	DocumentURI             string        `json:"document_uri,omitempty"`
-	GenreType               string        `json:"genre_type,omitempty"`
 	Title                   string        `json:"title,omitempty"`
-	Nickname                string        `json:"name,omitempty"`
 	Description             string        `json:"description,omitempty"`
 	TargetPrice             uint64        `json:"target_price,omitempty"`
 	Deadline                time.Time     `json:"deadline"`
