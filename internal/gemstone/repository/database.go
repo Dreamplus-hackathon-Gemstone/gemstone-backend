@@ -22,15 +22,19 @@ type ITransactor interface {
 
 type Transactor struct {
 	Client     *gorm.DB
-	Repository Repository
+	Repository domain.IRepository
+}
+
+func NewTransactor(client *gorm.DB, repository domain.IRepository) *Transactor {
+	return &Transactor{Client: client, Repository: repository}
 }
 
 type Repository struct {
-	ItemRepo     domain.Repository
-	TokenRepo    domain.Repository
-	MakerRepo    domain.Repository
-	MinerRepo    domain.Repository
-	CategoryRepo domain.Repository
+	ItemRepo     domain.IRepository
+	TokenRepo    domain.IRepository
+	MakerRepo    domain.IRepository
+	MinerRepo    domain.IRepository
+	CategoryRepo domain.IRepository
 }
 
 func NewRepository(db *gorm.DB) *Repository {
@@ -40,10 +44,6 @@ func NewRepository(db *gorm.DB) *Repository {
 	token := NewTokenRepository(db)
 	category := NewCategoryRepository(db)
 	return &Repository{ItemRepo: item, MinerRepo: miner, MakerRepo: maker, TokenRepo: token, CategoryRepo: category}
-}
-
-func NewTransactor(client *gorm.DB) *Transactor {
-	return &Transactor{Client: client}
 }
 
 func (t Transactor) GetTx() *gorm.DB {

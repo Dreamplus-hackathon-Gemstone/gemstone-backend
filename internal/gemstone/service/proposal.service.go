@@ -3,10 +3,10 @@ package service
 import "gemstone-backend/internal/gemstone/domain"
 
 type ProposalService struct {
-	itemRepo domain.Repository
+	itemRepo domain.IRepository
 }
 
-func NewItemService(itemRepo domain.Repository) *ProposalService {
+func NewItemService(itemRepo domain.IRepository) *ProposalService {
 	return &ProposalService{itemRepo: itemRepo}
 }
 

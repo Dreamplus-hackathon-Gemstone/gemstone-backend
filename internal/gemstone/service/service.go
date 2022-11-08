@@ -6,11 +6,11 @@ import (
 )
 
 type Service struct {
-	ItemService     domain.Service
-	CategoryService domain.Service
-	MakerService    domain.Service
-	MinerService    domain.Service
-	TokenService    domain.Service
+	ItemService     domain.IService
+	CategoryService domain.IService
+	MakerService    domain.IService
+	MinerService    domain.IService
+	TokenService    domain.IService
 }
 
 func NewService(repository *repository.Repository) *Service {

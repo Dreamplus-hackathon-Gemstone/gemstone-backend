@@ -3,10 +3,10 @@ package service
 import "gemstone-backend/internal/gemstone/domain"
 
 type TokenService struct {
-	tokenRepo domain.Repository
+	tokenRepo domain.IRepository
 }
 
-func NewTokenService(tokenRepo domain.Repository) *TokenService {
+func NewTokenService(tokenRepo domain.IRepository) *TokenService {
 	return &TokenService{tokenRepo: tokenRepo}
 }
 

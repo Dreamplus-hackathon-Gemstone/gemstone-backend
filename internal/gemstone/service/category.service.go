@@ -3,7 +3,7 @@ package service
 import "gemstone-backend/internal/gemstone/domain"
 
 type service struct {
-	genreRepo domain.Repository
+	genreRepo domain.IRepository
 }
 
 func (s service) Find() error {
@@ -31,6 +31,6 @@ func (s service) Delete() error {
 	panic("implement me")
 }
 
-func newService(categoryRepo domain.Repository) *service {
+func newService(categoryRepo domain.IRepository) *service {
 	return &service{genreRepo: categoryRepo}
 }

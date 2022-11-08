@@ -3,9 +3,9 @@ package handler
 import "gemstone-backend/internal/gemstone/domain"
 
 type GenreHandler struct {
-	service domain.Service
+	service domain.IService
 }
 
-func NewCategoryHandler(service domain.Service) *GenreHandler {
+func NewCategoryHandler(service domain.IService) *GenreHandler {
 	return &GenreHandler{service: service}
 }

@@ -1,7 +1,7 @@
 package domain
 
-// Service , interface defining all CRUD operations
-type Service interface {
+// IService , interface defining all CRUD operations
+type IService interface {
 	Find() error
 	Store() error
 	Update() error
@@ -9,8 +9,8 @@ type Service interface {
 	Delete() error
 }
 
-// Repository , interface acting like a port for the database implementation
-type Repository interface {
+// IRepository , interface acting like a port for the database implementation
+type IRepository interface {
 	Find() error
 	Store() error
 	Update() error

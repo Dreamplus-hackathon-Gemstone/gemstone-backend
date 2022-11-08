@@ -34,11 +34,11 @@ func (app *App) Run() {
 
 	//Get Transactor struct.
 	//It includes gorm.DB with access permission for every table.
-	db := repository.NewTransactor(repository.NewClient(cfg))
-	log.Println("Create Transactor ... ")
+	db := repository.NewClient(cfg)
+	log.Println("Create GORM Client")
 
 	// Get Repository
-	newRepository := repository.NewRepository(db.Client)
+	newRepository := repository.NewRepository(db)
 	log.Println("Create Repository ... ")
 
 	// Get Service

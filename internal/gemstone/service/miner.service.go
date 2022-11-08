@@ -3,10 +3,10 @@ package service
 import "gemstone-backend/internal/gemstone/domain"
 
 type MinerService struct {
-	minerRepo domain.Repository
+	minerRepo domain.IRepository
 }
 
-func NewMinerService(minerRepo domain.Repository) *MinerService {
+func NewMinerService(minerRepo domain.IRepository) *MinerService {
 	return &MinerService{minerRepo: minerRepo}
 }
 

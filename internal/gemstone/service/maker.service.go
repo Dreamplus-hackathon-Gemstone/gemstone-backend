@@ -3,10 +3,10 @@ package service
 import "gemstone-backend/internal/gemstone/domain"
 
 type MakerService struct {
-	makerRepo domain.Repository
+	makerRepo domain.IRepository
 }
 
-func NewMakerService(makerRepo domain.Repository) *MakerService {
+func NewMakerService(makerRepo domain.IRepository) *MakerService {
 	return &MakerService{makerRepo: makerRepo}
 }
 
