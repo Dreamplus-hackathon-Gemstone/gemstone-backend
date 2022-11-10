@@ -1,36 +1,38 @@
 package repository
 
-import "gorm.io/gorm"
+import (
+	"gemstone-backend/internal/gemstone/transactor"
+)
 
 type GenreRepository struct {
-	tx *gorm.DB
+	transactor.ITransactor
 }
 
-func (c GenreRepository) Find() error {
+func NewGenreRepository(ITransactor transactor.ITransactor) *GenreRepository {
+	return &GenreRepository{ITransactor: ITransactor}
+}
+
+func (c *GenreRepository) Find() error {
 	//TODO implement me
 	panic("implement me")
 }
 
-func (c GenreRepository) Store() error {
+func (c *GenreRepository) Store() error {
 	//TODO implement me
 	panic("implement me")
 }
 
-func (c GenreRepository) Update() error {
+func (c *GenreRepository) Update() error {
 	//TODO implement me
 	panic("implement me")
 }
 
-func (c GenreRepository) FindAll() error {
+func (c *GenreRepository) FindAll() error {
 	//TODO implement me
 	panic("implement me")
 }
 
-func (c GenreRepository) Delete() error {
+func (c *GenreRepository) Delete() error {
 	//TODO implement me
 	panic("implement me")
-}
-
-func NewCategoryRepository(tx *gorm.DB) *GenreRepository {
-	return &GenreRepository{tx: tx}
 }

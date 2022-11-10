@@ -46,7 +46,7 @@ func (app *App) Run() {
 	log.Println("Create Service ... ")
 
 	// Get Handler
-	h := handler.NewHandler(handler.NewItemHandler(svc.ItemService), handler.NewMakerHandler(svc.MakerService), handler.NewMinerHandler(svc.MinerService), handler.NewTokenHandler(svc.TokenService), handler.NewCategoryHandler(svc.CategoryService))
+	h := handler.NewHandler(handler.NewItemHandler(svc.ProposalService), handler.NewMakerHandler(svc.MakerService), handler.NewMinerHandler(svc.MinerService), handler.NewTokenHandler(svc.TokenService), handler.NewCategoryHandler(svc.GenreService))
 	log.Println("Create Handler ... ")
 
 	// Create Fiber App

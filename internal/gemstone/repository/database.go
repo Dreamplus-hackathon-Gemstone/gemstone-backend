@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"gemstone-backend/internal/gemstone/config"
 	"gemstone-backend/internal/gemstone/domain"
+	"gemstone-backend/internal/gemstone/transactor"
 	_ "github.com/lib/pq"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
@@ -13,21 +14,6 @@ import (
 	"os"
 	"time"
 )
-
-type ITransactor interface {
-	GetTx() *gorm.DB
-	Execute() error
-	ExecuteContext() error
-}
-
-type Transactor struct {
-	Client     *gorm.DB
-	Repository domain.IRepository
-}
-
-func NewTransactor(client *gorm.DB, repository domain.IRepository) *Transactor {
-	return &Transactor{Client: client, Repository: repository}
-}
 
 type Repository struct {
 	ItemRepo     domain.IRepository
@@ -38,27 +24,12 @@ type Repository struct {
 }
 
 func NewRepository(db *gorm.DB) *Repository {
-	item := NewItemRepository(db)
-	miner := NewMinerRepository(db)
-	maker := NewMakerRepository(db)
-	token := NewTokenRepository(db)
-	category := NewCategoryRepository(db)
+	item := NewProposalRepository(transactor.NewTransactor(db))
+	miner := NewMinerRepository(transactor.NewTransactor(db))
+	maker := NewMakerRepository(transactor.NewTransactor(db))
+	token := NewTokenRepository(transactor.NewTransactor(db))
+	category := NewGenreRepository(transactor.NewTransactor(db))
 	return &Repository{ItemRepo: item, MinerRepo: miner, MakerRepo: maker, TokenRepo: token, CategoryRepo: category}
-}
-
-func (t Transactor) GetTx() *gorm.DB {
-	//TODO implement me
-	panic("implement me")
-}
-
-func (t Transactor) Execute() error {
-	//TODO implement me
-	panic("implement me")
-}
-
-func (t Transactor) ExecuteContext() error {
-	//TODO implement me
-	panic("implement me")
 }
 
 func NewClient(config *config.Config) *gorm.DB {

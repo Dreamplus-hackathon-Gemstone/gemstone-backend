@@ -6,31 +6,31 @@ type ProposalService struct {
 	itemRepo domain.IRepository
 }
 
-func NewItemService(itemRepo domain.IRepository) *ProposalService {
+func NewProposalService(itemRepo domain.IRepository) *ProposalService {
 	return &ProposalService{itemRepo: itemRepo}
 }
 
-func (s ProposalService) Find() error {
+func (s *ProposalService) Find() error {
 	//TODO implement me
 	panic("implement me")
 }
 
-func (s ProposalService) Store() error {
+func (s *ProposalService) Store() error {
 	//TODO implement me
 	panic("implement me")
 }
 
-func (s ProposalService) Update() error {
+func (s *ProposalService) Update() error {
 	//TODO implement me
 	panic("implement me")
 }
 
-func (s ProposalService) FindAll() error {
+func (s *ProposalService) FindAll() error {
 	//TODO implement me
 	panic("implement me")
 }
 
-func (s ProposalService) Delete() error {
+func (s *ProposalService) Delete() error {
 	//TODO implement me
 	panic("implement me")
 }

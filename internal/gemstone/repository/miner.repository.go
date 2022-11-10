@@ -1,9 +1,15 @@
 package repository
 
-import "gorm.io/gorm"
+import (
+	"gemstone-backend/internal/gemstone/transactor"
+)
 
 type MinerRepository struct {
-	tx *gorm.DB
+	transactor.ITransactor
+}
+
+func NewMinerRepository(ITransactor transactor.ITransactor) *MinerRepository {
+	return &MinerRepository{ITransactor: ITransactor}
 }
 
 func (m MinerRepository) Find() error {
@@ -29,8 +35,4 @@ func (m MinerRepository) FindAll() error {
 func (m MinerRepository) Delete() error {
 	//TODO implement me
 	panic("implement me")
-}
-
-func NewMinerRepository(tx *gorm.DB) *MinerRepository {
-	return &MinerRepository{tx: tx}
 }

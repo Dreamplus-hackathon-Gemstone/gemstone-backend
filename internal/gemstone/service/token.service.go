@@ -10,27 +10,27 @@ func NewTokenService(tokenRepo domain.IRepository) *TokenService {
 	return &TokenService{tokenRepo: tokenRepo}
 }
 
-func (s TokenService) Find() error {
+func (s *TokenService) Find() error {
 	//TODO implement me
 	panic("implement me")
 }
 
-func (s TokenService) Store() error {
+func (s *TokenService) Store() error {
 	//TODO implement me
 	panic("implement me")
 }
 
-func (s TokenService) Update() error {
+func (s *TokenService) Update() error {
 	//TODO implement me
 	panic("implement me")
 }
 
-func (s TokenService) FindAll() error {
+func (s *TokenService) FindAll() error {
 	//TODO implement me
 	panic("implement me")
 }
 
-func (s TokenService) Delete() error {
+func (s *TokenService) Delete() error {
 	//TODO implement me
 	panic("implement me")
 }
