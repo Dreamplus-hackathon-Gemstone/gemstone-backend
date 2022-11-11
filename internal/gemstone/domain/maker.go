@@ -8,9 +8,10 @@ type Makers struct {
 	Nickname    string      `json:"nickname" gorm:"not_null;unique;"`
 	PhoneNumber string      `json:"phone_number,omitempty" gorm:"not_null;"`
 	HomeAddress string      `json:"home_address,omitempty" gorm:"not_null;"`
+	Email       string      `json:"email,omitempty" gorm:"not_null;unique"`
 	Password    string      `json:"password,omitempty" gorm:"not_null;"`
 	Proposals   []Proposals `gorm:"foreignKey:MakerID;constraint:OnUpdate:CASCADE,OnDelete:CASCADE;" json:"proposals,omitempty" `
-	Movies      []Movie     `gorm:"foreignKey:MakerID;constraint:OnUpdate:CASCADE,OnDelete:CASCADE;" json:"movies,omitempty"`
+	Movies      []Movies    `gorm:"foreignKey:MakerID;constraint:OnUpdate:CASCADE,OnDelete:CASCADE;" json:"movies,omitempty"`
 	CreatedAt   time.Time   `gorm:"autoCreateTime:nano" json:"created_at"`
 	UpdatedAt   time.Time   `gorm:"autoUpdateTime" json:"updated_at"`
 }

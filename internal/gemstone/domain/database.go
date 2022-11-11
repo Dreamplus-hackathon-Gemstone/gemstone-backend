@@ -4,7 +4,6 @@ import (
 	"database/sql"
 	"fmt"
 	"gemstone-backend/internal/gemstone/config"
-	"gemstone-backend/internal/gemstone/global"
 	_ "github.com/lib/pq"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
@@ -13,14 +12,6 @@ import (
 	"os"
 	"time"
 )
-
-type Repository[R global.ReturnType, P global.Parameter] struct {
-	ProposalRepo global.IRepository[P, R]
-	TokenRepo    global.IRepository[P, R]
-	MakerRepo    global.IRepository[P, R]
-	MinerRepo    global.IRepository[P, R]
-	GenreRepo    global.IRepository[P, R]
-}
 
 func NewClient(config *config.Config) *gorm.DB {
 	newLogger := logger.New(
@@ -54,7 +45,7 @@ func NewClient(config *config.Config) *gorm.DB {
 	_ = client.Migrator().DropTable(&Miners{})
 	_ = client.Migrator().DropTable(&Makers{})
 	_ = client.Migrator().DropTable(&Tokens{})
-	_ = client.Migrator().DropTable(&Movie{})
+	_ = client.Migrator().DropTable(&Movies{})
 	_ = client.Migrator().DropTable(&MovieMiners{})
 	_ = client.Migrator().DropTable(&ProposalMiners{})
 
@@ -66,8 +57,8 @@ func NewClient(config *config.Config) *gorm.DB {
 	log.Printf("Create table Miners ... err : %v\n", err)
 	err = client.Migrator().CreateTable(&Makers{})
 	log.Printf("Create table Makers ... err : %v\n", err)
-	err = client.Migrator().CreateTable(&Movie{})
-	log.Printf("Create table Movie ... err : %v\n", err)
+	err = client.Migrator().CreateTable(&Movies{})
+	log.Printf("Create table Movies ... err : %v\n", err)
 	err = client.Migrator().CreateTable(&Proposals{})
 	log.Printf("Create table Proposals ... err : %v\n", err)
 	err = client.Migrator().CreateTable(&MovieMiners{})

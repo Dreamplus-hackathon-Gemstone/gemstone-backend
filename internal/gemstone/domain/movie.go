@@ -2,7 +2,7 @@ package domain
 
 import "time"
 
-type Movie struct {
+type Movies struct {
 	ID           uint      `gorm:"primaryKey;autoIncrement;index;"`
 	MakerID      uint      `json:"maker_id,omitempty" gorm:"not_null"`
 	GenreID      uint      `json:"genre_id,omitempty" gorm:"not_null"`

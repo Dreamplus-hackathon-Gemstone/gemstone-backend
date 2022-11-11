@@ -5,35 +5,20 @@ import (
 	"gorm.io/gorm"
 )
 
-type MinerRepo[P global.Parameter, R global.ReturnType] struct {
+type MinerRepo struct {
 	db *gorm.DB
 }
 
-func (m *MinerRepo[P, R]) Find(param P) (ret R) {
+func NewMinerRepo(db *gorm.DB) global.IMinerRepo {
+	return &MinerRepo{db: db}
+}
+
+func (m *MinerRepo) Find(account global.FindMinerReq) (ret global.FindMinerRes) {
 	//TODO implement me
 	panic("implement me")
 }
 
-func (m *MinerRepo[P, R]) FindAll(param P) (ret R) {
+func (m *MinerRepo) Store(param global.RegisterMinerReq) (ret global.RegisterMinerRes) {
 	//TODO implement me
 	panic("implement me")
-}
-
-func (m *MinerRepo[P, R]) Store(param P) (ret R) {
-	//TODO implement me
-	panic("implement me")
-}
-
-func (m *MinerRepo[P, R]) Update(param P) (ret R) {
-	//TODO implement me
-	panic("implement me")
-}
-
-func (m *MinerRepo[P, R]) Delete(param P) (ret R) {
-	//TODO implement me
-	panic("implement me")
-}
-
-func NewMinerRepo[P global.Parameter, R global.ReturnType](db *gorm.DB) global.IRepository[P, R] {
-	return &MinerRepo[P, R]{db: db}
 }

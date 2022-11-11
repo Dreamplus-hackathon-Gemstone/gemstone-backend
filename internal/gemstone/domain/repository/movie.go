@@ -5,35 +5,35 @@ import (
 	"gorm.io/gorm"
 )
 
-type MovieRepo[P global.Parameter, R global.ReturnType] struct {
+type MovieRepo struct {
 	db *gorm.DB
 }
 
-func (m *MovieRepo[P, R]) Find(param P) (ret R) {
+func NewMovieRepo(db *gorm.DB) global.IMovieRepo {
+	return &MovieRepo{db: db}
+}
+
+func (m *MovieRepo) Find(account global.FindItemReq) (ret global.FindMovieRes) {
 	//TODO implement me
 	panic("implement me")
 }
 
-func (m *MovieRepo[P, R]) FindAll(param P) (ret R) {
+func (m *MovieRepo) FindMany(param global.FindManyReq) (ret global.ReturnType) {
 	//TODO implement me
 	panic("implement me")
 }
 
-func (m *MovieRepo[P, R]) Store(param P) (ret R) {
+func (m *MovieRepo) Store(param global.Parameter) (ret global.ReturnType) {
 	//TODO implement me
 	panic("implement me")
 }
 
-func (m *MovieRepo[P, R]) Update(param P) (ret R) {
+func (m *MovieRepo) Update(param global.Parameter) (ret global.ReturnType) {
 	//TODO implement me
 	panic("implement me")
 }
 
-func (m *MovieRepo[P, R]) Delete(param P) (ret R) {
+func (m *MovieRepo) Delete(param global.Parameter) (ret global.ReturnType) {
 	//TODO implement me
 	panic("implement me")
-}
-
-func NewMovieRepo[P global.Parameter, R global.ReturnType](db *gorm.DB) global.IRepository[P, R] {
-	return &MovieRepo[P, R]{db: db}
 }

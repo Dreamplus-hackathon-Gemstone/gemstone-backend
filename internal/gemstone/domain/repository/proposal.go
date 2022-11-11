@@ -5,35 +5,35 @@ import (
 	"gorm.io/gorm"
 )
 
-type ProposalRepo[P global.Parameter, R global.ReturnType] struct {
+type ProposalRepo struct {
 	db *gorm.DB
 }
 
-func (p *ProposalRepo[P, R]) Find(param P) (ret R) {
+func NewProposalRepo(db *gorm.DB) global.IProposalRepo {
+	return &ProposalRepo{db: db}
+}
+
+func (p *ProposalRepo) FindByContentID(account global.FindMinerReq) (ret global.FindMinerRes) {
 	//TODO implement me
 	panic("implement me")
 }
 
-func (p *ProposalRepo[P, R]) FindAll(param P) (ret R) {
+func (p *ProposalRepo) FindMany(param global.FindManyReq) (ret global.FindManyProposalRes) {
 	//TODO implement me
 	panic("implement me")
 }
 
-func (p *ProposalRepo[P, R]) Store(param P) (ret R) {
+func (p *ProposalRepo) Store(param global.Parameter) (ret global.ReturnType) {
 	//TODO implement me
 	panic("implement me")
 }
 
-func (p *ProposalRepo[P, R]) Update(param P) (ret R) {
+func (p *ProposalRepo) Update(param global.Parameter) (ret global.ReturnType) {
 	//TODO implement me
 	panic("implement me")
 }
 
-func (p *ProposalRepo[P, R]) Delete(param P) (ret R) {
+func (p *ProposalRepo) Delete(param global.Parameter) (ret global.ReturnType) {
 	//TODO implement me
 	panic("implement me")
-}
-
-func NewProposalRepo[P global.Parameter, R global.ReturnType](db *gorm.DB) global.IRepository[P, R] {
-	return &ProposalRepo[P, R]{db: db}
 }
