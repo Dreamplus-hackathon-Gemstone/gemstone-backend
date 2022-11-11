@@ -1,0 +1,42 @@
+
+{
+  "Token" : {
+    "TokenID" : "0x0과 같은 TokenID",
+    "TokenURI" : "Token Metadata 가 담긴 URI 주소"
+  },
+  "Genre": {
+    "GenreType" : "장르 이름"
+  },
+  "Maker" : {
+    "Name" : "Maker 실명",
+    "Nickname" : "Maker 닉네임",
+    "PhoneNumber" :  "전화번호",
+    "HomeAddress" : "주소",
+    "Password" :  "비밀번호"
+  },
+  "Miner" : {
+    "Account" : "지갑 주소",
+    "Nickname" : "Miner 닉네임",
+    "AuthID" :  "로그인 UUID"
+  },
+  "Movie" : {
+    "Nickname" : "Maker 닉네임",
+    "Description" : "영화 설명",
+    "ContentID" :  "IPFS Content ID",
+    "ThumbnailURI" : "썸네일 URI 주소",
+    "MovieURI" :  "영화 URI 주소"
+  },
+  "Proposal": {
+    "ContentID" : "IPFS Content ID",
+    "ThumbnailURI" : "썸네일 URI 주소",
+    "DocumentURI" :  "PDF 문서 URI 주소",
+    "GenreType" : "장르",
+    "Title" :  "영화 제목",
+    "Nickname" : "Maker 닉네임",
+    "Description" :  "영화 설명",
+    "TargetPrice" : "목표 금액",
+    "Deadline" :  "목표 기한",
+    "ExpectedReleaseYear" : "예상 개봉년도",
+    "EstimatedProductionTime" :  "예상 제작기간"
+  }
+}

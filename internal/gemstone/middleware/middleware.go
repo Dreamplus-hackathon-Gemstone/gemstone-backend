@@ -10,7 +10,7 @@ import (
 
 func NewGemStoneAppMiddleware(router *fiber.App) fiber.Router {
 	fLogger := router.Use(logger.New(logger.Config{
-		Format: "[${ip}]:${port} ${status} - ${method} ${path}\n",
+		Format: "[${ip}]:${adapter} ${status} - ${method} ${path}\n",
 	}))
 	fCsrf := fLogger.Use(csrf.New())
 	api := fCsrf.Group("/api", cors.New())

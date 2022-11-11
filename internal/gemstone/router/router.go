@@ -7,4 +7,7 @@ import (
 
 func SetRouter(router fiber.Router, handler *handler.Handler) {
 	router.Get("/ping", handler.Ping)
+
+	authRouter := router.Group("/auth")
+	authRouter.Get("/verify/:nickname", handler.AuthHandler.VerifyNickname)
 }

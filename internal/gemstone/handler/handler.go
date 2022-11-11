@@ -5,15 +5,11 @@ import (
 )
 
 type Handler struct {
-	*ProposalHandler
-	*MakerHandler
-	*MinerHandler
-	*TokenHandler
-	*GenreHandler
+	AuthHandler *AuthHandler
 }
 
-func NewHandler(itemHandler *ProposalHandler, makerHandler *MakerHandler, minerHandler *MinerHandler, tokenHandler *TokenHandler, categoryHandler *GenreHandler) *Handler {
-	return &Handler{ProposalHandler: itemHandler, MakerHandler: makerHandler, MinerHandler: minerHandler, TokenHandler: tokenHandler, GenreHandler: categoryHandler}
+func NewHandler(registerHandler *AuthHandler) *Handler {
+	return &Handler{AuthHandler: registerHandler}
 }
 
 func (h *Handler) Ping(c *fiber.Ctx) error {
