@@ -9,7 +9,7 @@ type (
 
 	FindMovieRes struct {
 		Success bool `json:"success"`
-		Movie   *domain.Movies
+		Movie   *domain.Movie
 	}
 
 	FindManyReq struct {
@@ -18,11 +18,11 @@ type (
 
 	FindManyMovieRes struct {
 		Success bool `json:"success"`
-		Movie   []*domain.Movies
+		Movie   []*domain.Movie
 	}
 
 	FindManyProposalRes struct {
 		Success bool `json:"success"`
-		Movie   []*domain.Proposals
+		Movie   []*domain.Proposal
 	}
 )

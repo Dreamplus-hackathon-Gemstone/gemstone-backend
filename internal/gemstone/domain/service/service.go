@@ -6,12 +6,10 @@ import (
 )
 
 type Service struct {
-	MakerService global.IMakerService
-	MinerService global.IMinerService
+	UserService global.IUserService
 }
 
 func NewService(repo *repository.Repository) *Service {
-	maker := NewMakerService(repo.MakerRepo)
-	miner := NewMinerService(repo.MinerRepo)
-	return &Service{MakerService: maker, MinerService: miner}
+	user := NewUserService(repo.UserRepo)
+	return &Service{user}
 }

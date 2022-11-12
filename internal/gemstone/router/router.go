@@ -8,13 +8,9 @@ import (
 func SetRouter(router fiber.Router, handler *handler.Handler) {
 	router.Get("/ping", handler.Ping)
 
-	minerRouter := router.Group("/miner")
-	minerRouter.Post("/login", handler.MinerHandler.Login)
-	minerRouter.Post("/register", handler.MinerHandler.Register)
-
-	makerRouter := router.Group("/maker")
-	makerRouter.Get("/verify/:nickname", handler.MakerHandler.VerifyNickname)
-	makerRouter.Post("/login", handler.MakerHandler.Login)
-	makerRouter.Post("/register", handler.MakerHandler.Register)
-	makerRouter.Patch("/update", handler.MakerHandler.UpdateNickname)
+	authRouter := router.Group("/auth")
+	authRouter.Get("/verify/:nickname", handler.UserHandler.VerifyNickname)
+	authRouter.Post("/register", handler.UserHandler.Register)
+	authRouter.Post("/login", handler.UserHandler.Login)
+	authRouter.Patch("/update", handler.UserHandler.UpdateNickname)
 }

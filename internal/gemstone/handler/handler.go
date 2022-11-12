@@ -7,14 +7,12 @@ import (
 )
 
 type Handler struct {
-	MakerHandler global.IMakerHandler
-	MinerHandler global.IMinerHandler
+	UserHandler global.IUserHandler
 }
 
-func NewHandler(service *service.Service) *Handler {
-	maker := NewMakerHandler(service.MakerService)
-	miner := NewMinerHandler(service.MinerService)
-	return &Handler{maker, miner}
+func NewHandler(svc *service.Service) *Handler {
+	user := NewUserHandler(svc.UserService)
+	return &Handler{user}
 }
 
 func (h *Handler) Ping(c *fiber.Ctx) error {

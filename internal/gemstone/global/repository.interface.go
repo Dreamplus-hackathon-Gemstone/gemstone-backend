@@ -13,19 +13,15 @@ type IGenreRepo interface {
 	Store(param Parameter) (ret ReturnType)
 }
 
-type IMakerRepo interface {
-	FindByNickname(nickname VerifyNicknameReq) (ret VerifyNicknameRes)
-	Store(param RegisterMakerReq) (ret RegisterMakerRes)
-	Update(param UpdateMakerNicknameReq) (ret UpdateMakerNicknameRes)
-}
-
-type IMinerRepo interface {
-	Find(account FindMinerReq) (ret FindMinerRes)
-	Store(param RegisterMinerReq) (ret RegisterMinerRes)
+type IUserRepo interface {
+	FindByNickname(param VerifyNicknameReq) (ret VerifyNicknameRes)
+	Store(param RegisterReq) (ret RegisterRes)
+	Update(param UpdateNicknameReq) (ret UpdateNicknameRes)
+	Authentication(param LoginReq) (ret LoginRes)
 }
 
 type IProposalRepo interface {
-	FindByContentID(account FindMinerReq) (ret FindMinerRes)
+	FindByContentID(account Parameter) (ret ReturnType)
 	FindMany(param FindManyReq) (ret FindManyProposalRes)
 	Store(param Parameter) (ret ReturnType)
 	Update(param Parameter) (ret ReturnType)
@@ -33,7 +29,7 @@ type IProposalRepo interface {
 }
 
 type IMovieRepo interface {
-	Find(account FindItemReq) (ret FindMovieRes)
+	Find(param FindItemReq) (ret FindMovieRes)
 	FindMany(param FindManyReq) (ret ReturnType)
 	Store(param Parameter) (ret ReturnType)
 	Update(param Parameter) (ret ReturnType)
@@ -41,6 +37,6 @@ type IMovieRepo interface {
 }
 
 type ITokenRepo interface {
-	Find(account Parameter) (ret ReturnType)
+	Find(param Parameter) (ret ReturnType)
 	Store(param Parameter) (ret ReturnType)
 }

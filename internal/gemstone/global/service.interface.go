@@ -8,14 +8,9 @@ type IService interface {
 	Delete(param Parameter) (ret ReturnType)
 }
 
-type IMakerService interface {
+type IUserService interface {
 	VerifyNickname(param VerifyNicknameReq) VerifyNicknameRes
-	UpdateNickname(param UpdateMakerNicknameReq) UpdateMakerNicknameRes
-	Login(param MakerLoginReq) LoginRes
-	Register(param RegisterMakerReq) RegisterMakerRes
-}
-
-type IMinerService interface {
-	Login(param MinerLoginReq) LoginRes
-	Register(param RegisterMinerReq) RegisterMinerRes
+	UpdateNickname(param UpdateNicknameReq) UpdateNicknameRes
+	Login(param LoginReq) LoginRes
+	Register(param RegisterReq) RegisterRes
 }

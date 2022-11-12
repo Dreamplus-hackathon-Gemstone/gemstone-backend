@@ -40,30 +40,34 @@ func NewClient(config *config.Config) *gorm.DB {
 		log.Panicf("Panic occured while opening postgresql client : %v\n", err)
 	}
 
-	_ = client.Migrator().DropTable(&Genres{})
-	_ = client.Migrator().DropTable(&Proposals{})
-	_ = client.Migrator().DropTable(&Miners{})
-	_ = client.Migrator().DropTable(&Makers{})
-	_ = client.Migrator().DropTable(&Tokens{})
-	_ = client.Migrator().DropTable(&Movies{})
-	_ = client.Migrator().DropTable(&MovieMiners{})
-	_ = client.Migrator().DropTable(&ProposalMiners{})
+	//_ = client.Migrator().DropTable(&Genres{})
+	//_ = client.Migrator().DropTable(&Proposal{})
+	//_ = client.Migrator().DropTable(&User{})
+	//_ = client.Migrator().DropTable(&Tokens{})
+	//_ = client.Migrator().DropTable(&Movie{})
+	//_ = client.Migrator().DropTable(&MovieUser{})
+	//_ = client.Migrator().DropTable(&ProposalUser{})
 
 	err = client.Migrator().CreateTable(&Genres{})
 	log.Printf("Create table Genres ... err : %v\n", err)
+
 	err = client.Migrator().CreateTable(&Tokens{})
 	log.Printf("Create table Tokens ... err : %v\n", err)
-	err = client.Migrator().CreateTable(&Miners{})
-	log.Printf("Create table Miners ... err : %v\n", err)
-	err = client.Migrator().CreateTable(&Makers{})
-	log.Printf("Create table Makers ... err : %v\n", err)
-	err = client.Migrator().CreateTable(&Movies{})
-	log.Printf("Create table Movies ... err : %v\n", err)
-	err = client.Migrator().CreateTable(&Proposals{})
-	log.Printf("Create table Proposals ... err : %v\n", err)
-	err = client.Migrator().CreateTable(&MovieMiners{})
-	log.Printf("Create table MovieMiners ... err : %v\n", err)
-	err = client.Migrator().CreateTable(&ProposalMiners{})
+
+	err = client.Migrator().CreateTable(&User{})
+	log.Printf("Create table User ... err : %v\n", err)
+
+	err = client.Migrator().CreateTable(&Movie{})
+	log.Printf("Create table Movie ... err : %v\n", err)
+
+	err = client.Migrator().CreateTable(&Proposal{})
+	log.Printf("Create table Proposal ... err : %v\n", err)
+
+	err = client.Migrator().CreateTable(&MovieUser{})
+	log.Printf("Create table MovieUser ... err : %v\n", err)
+
+	err = client.Migrator().CreateTable(&ProposalUser{})
 	log.Printf("Create table ProposalMiners ... err : %v\n", err)
+
 	return client
 }

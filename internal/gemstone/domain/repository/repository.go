@@ -7,26 +7,23 @@ import (
 
 type Repository struct {
 	GenreRepo    global.IGenreRepo
-	MakerRepo    global.IMakerRepo
+	UserRepo     global.IUserRepo
 	MovieRepo    global.IMovieRepo
 	ProposalRepo global.IProposalRepo
-	MinerRepo    global.IMinerRepo
 	TokenRepo    global.ITokenRepo
 }
 
 func NewRepository(db *gorm.DB) *Repository {
 	proposal := NewProposalRepo(db)
 	genre := NewGenreRepo(db)
-	maker := NewMakerRepo(db)
-	miner := NewMinerRepo(db)
+	user := NewUserRepo(db)
 	token := NewTokenRepo(db)
 	movie := NewMovieRepo(db)
 	return &Repository{
 		GenreRepo:    genre,
-		MakerRepo:    maker,
 		MovieRepo:    movie,
 		ProposalRepo: proposal,
-		MinerRepo:    miner,
+		UserRepo:     user,
 		TokenRepo:    token,
 	}
 }
