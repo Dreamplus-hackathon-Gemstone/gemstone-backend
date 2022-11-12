@@ -6,6 +6,10 @@ import (
 )
 
 func SetRouter(router fiber.Router, handler *handler.Handler) {
+	router.Get("/", func(ctx *fiber.Ctx) error {
+		return ctx.Status(fiber.StatusOK).SendString("Gemstone App")
+	})
+
 	router.Get("/ping", handler.Ping)
 
 	authRouter := router.Group("/auth")

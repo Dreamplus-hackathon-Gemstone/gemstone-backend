@@ -1,0 +1,170 @@
+basePath: /
+definitions:
+  global.LoginReq:
+    properties:
+      email:
+        type: string
+      password:
+        type: string
+    type: object
+  global.LoginRes:
+    properties:
+      err: {}
+      success:
+        type: boolean
+    type: object
+  global.RegisterReq:
+    properties:
+      account:
+        type: string
+      email:
+        type: string
+      name:
+        type: string
+      nickname:
+        type: string
+      password:
+        type: string
+    type: object
+  global.RegisterRes:
+    properties:
+      err: {}
+      success:
+        type: boolean
+    type: object
+  global.UpdateNicknameReq:
+    properties:
+      id:
+        type: integer
+      nickname:
+        type: string
+    type: object
+  global.UpdateNicknameRes:
+    properties:
+      err: {}
+      success:
+        type: boolean
+    type: object
+  global.VerifyNicknameRes:
+    properties:
+      err: {}
+      success:
+        type: boolean
+    type: object
+host: 127.0.0.1:8080
+info:
+  contact:
+    email: ff.primrose@gmail.com
+    name: Backend-Tech
+  description: This is API Documentation Gemstone Backend
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  title: Gemstone Backend
+  version: "0.1"
+paths:
+  /api/v1/auth/login:
+    post:
+      consumes:
+      - application/json
+      description: 로그인
+      parameters:
+      - description: Login Req
+        in: body
+        name: LoginReq
+        required: true
+        schema:
+          $ref: '#/definitions/global.LoginReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/global.LoginRes'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/global.LoginRes'
+      summary: Login
+      tags:
+      - auth
+  /api/v1/auth/register:
+    post:
+      consumes:
+      - application/json
+      description: 회원가입
+      parameters:
+      - description: Register Req
+        in: body
+        name: RegisterReq
+        required: true
+        schema:
+          $ref: '#/definitions/global.RegisterReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/global.RegisterRes'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/global.RegisterRes'
+      summary: Register
+      tags:
+      - auth
+  /api/v1/auth/update:
+    patch:
+      consumes:
+      - application/json
+      description: 닉네임 수정
+      parameters:
+      - description: UpdateNickname Req
+        in: body
+        name: UpdateNicknameReq
+        required: true
+        schema:
+          $ref: '#/definitions/global.UpdateNicknameReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/global.UpdateNicknameRes'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/global.UpdateNicknameRes'
+      summary: UpdateNickname
+      tags:
+      - auth
+  /api/v1/auth/verify/{nickname}:
+    get:
+      consumes:
+      - application/json
+      description: 존재하는 닉네임인지 확인.
+      parameters:
+      - description: VerifyNickname Req
+        in: path
+        name: nickname
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/global.VerifyNicknameRes'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/global.VerifyNicknameRes'
+      summary: Verify User Nickname
+      tags:
+      - auth
+swagger: "2.0"

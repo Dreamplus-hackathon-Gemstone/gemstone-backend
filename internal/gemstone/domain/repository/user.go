@@ -2,6 +2,7 @@ package repository
 
 import (
 	"errors"
+	"fmt"
 	"gemstone-backend/internal/gemstone/domain"
 	"gemstone-backend/internal/gemstone/global"
 	"gorm.io/gorm"
@@ -31,12 +32,12 @@ func (u *UserRepo) FindByNickname(param global.VerifyNicknameReq) (ret global.Ve
 	if err := tx.Table(u.TableName()).Where(domain.User{Nickname: param.Nickname}).First(&res); err.Error != nil {
 		switch {
 		case errors.Is(err.Error, gorm.ErrRecordNotFound):
-			return global.VerifyNicknameRes{Success: true, Err: gorm.ErrRecordNotFound}
+			return global.VerifyNicknameRes{Success: true, Err: fmt.Errorf("possible nickname")}
 		default:
-			return global.VerifyNicknameRes{Success: false, Err: gorm.ErrInvalidTransaction}
+			return global.VerifyNicknameRes{Success: false, Err: fmt.Errorf("invalid transaction")}
 		}
 	}
-	return global.VerifyNicknameRes{Success: false, Err: nil}
+	return global.VerifyNicknameRes{Success: false, Err: fmt.Errorf("nickname already exists")}
 }
 
 func (u *UserRepo) Store(param global.RegisterReq) (ret global.RegisterRes) {
