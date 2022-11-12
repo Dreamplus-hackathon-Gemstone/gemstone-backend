@@ -4,7 +4,7 @@ import (
 	"time"
 )
 
-type Proposals struct {
+type Proposal struct {
 	ID                      uint          `gorm:"primaryKey;autoIncrement;index;"`
 	GenreID                 uint          `json:"genre_id,omitempty"`
 	MakerID                 uint          `json:"maker_id,omitempty"`
@@ -17,12 +17,12 @@ type Proposals struct {
 	Deadline                time.Time     `json:"deadline"`
 	ExpectedReleaseYear     time.Time     `json:"expected_release_year"`
 	EstimatedProductionTime time.Duration `json:"estimated_production_time,omitempty"`
-	Miners                  []*Miners     `json:"miners" gorm:"many2many:proposal_miners;"`
+	Miners                  []*User       `json:"miners" gorm:"many2many:proposal_users;"`
 	CreatedAt               time.Time     `gorm:"autoCreateTime:nano" json:"created_at"`
 	UpdatedAt               time.Time     `gorm:"autoUpdateTime" json:"updated_at"`
 }
 
-type ProposalMiners struct {
-	ProposalsID uint `json:"proposal_id,omitempty"`
-	MinersID    uint `json:"miner_id,omitempty"`
+type ProposalUser struct {
+	ProposalID uint `json:"proposal_id,omitempty"`
+	UserID     uint `json:"user_id,omitempty"`
 }

@@ -1,19 +1,18 @@
 package handler
 
 import (
+	"gemstone-backend/internal/gemstone/domain/service"
+	"gemstone-backend/internal/gemstone/global"
 	"github.com/gofiber/fiber/v2"
 )
 
 type Handler struct {
-	*ProposalHandler
-	*MakerHandler
-	*MinerHandler
-	*TokenHandler
-	*GenreHandler
+	UserHandler global.IUserHandler
 }
 
-func NewHandler(itemHandler *ProposalHandler, makerHandler *MakerHandler, minerHandler *MinerHandler, tokenHandler *TokenHandler, categoryHandler *GenreHandler) *Handler {
-	return &Handler{ProposalHandler: itemHandler, MakerHandler: makerHandler, MinerHandler: minerHandler, TokenHandler: tokenHandler, GenreHandler: categoryHandler}
+func NewHandler(svc *service.Service) *Handler {
+	user := NewUserHandler(svc.UserService)
+	return &Handler{user}
 }
 
 func (h *Handler) Ping(c *fiber.Ctx) error {

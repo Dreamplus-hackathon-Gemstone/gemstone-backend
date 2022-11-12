@@ -3,11 +3,12 @@ package gemstone
 import (
 	"context"
 	"gemstone-backend/internal/gemstone/config"
+	"gemstone-backend/internal/gemstone/domain"
+	"gemstone-backend/internal/gemstone/domain/repository"
+	"gemstone-backend/internal/gemstone/domain/service"
 	"gemstone-backend/internal/gemstone/handler"
 	"gemstone-backend/internal/gemstone/middleware"
-	"gemstone-backend/internal/gemstone/repository"
 	"gemstone-backend/internal/gemstone/router"
-	"gemstone-backend/internal/gemstone/service"
 	"github.com/gofiber/fiber/v2"
 	"log"
 	"os"
@@ -34,26 +35,27 @@ func (app *App) Run() {
 
 	//Get Transactor struct.
 	//It includes gorm.DB with access permission for every table.
-	db := repository.NewClient(cfg)
+	db := domain.NewClient(cfg)
 	log.Println("Create GORM Client")
 
-	// Get Repository
+	// Get Domain Repository
 	newRepository := repository.NewRepository(db)
-	log.Println("Create Repository ... ")
+	log.Println("Create Repository ... ", newRepository)
 
-	// Get Service
+	// Get Domain Service
 	svc := service.NewService(newRepository)
 	log.Println("Create Service ... ")
 
-	// Get Handler
-	h := handler.NewHandler(handler.NewItemHandler(svc.ItemService), handler.NewMakerHandler(svc.MakerService), handler.NewMinerHandler(svc.MinerService), handler.NewTokenHandler(svc.TokenService), handler.NewCategoryHandler(svc.CategoryService))
-	log.Println("Create Handler ... ")
+	// Set Handler ...
+	h := handler.NewHandler(svc)
+	log.Println("Set Handler ...")
 
 	// Create Fiber App
 
 	// Add middleware for router
 	r := middleware.NewGemStoneAppMiddleware(app.router)
 	log.Println("Applying middleware ... ")
+
 	router.SetRouter(r, h)
 	log.Println("Setting router ... ")
 

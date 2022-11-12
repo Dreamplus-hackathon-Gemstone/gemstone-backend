@@ -10,12 +10,12 @@ type Movie struct {
 	Description  string    `json:"description,omitempty" gorm:"not_null"`
 	ThumbnailURI string    `json:"thumbnail_uri,omitempty"`
 	MovieURI     string    `json:"movie_uri,omitempty" `
-	Miners       []*Miners `gorm:"many2many:movie_miners;" json:"miners"`
+	Miners       []*User   `gorm:"many2many:movie_users;" json:"miners"`
 	CreatedAt    time.Time `gorm:"autoCreateTime:nano" json:"created_at"`
 	UpdatedAt    time.Time `gorm:"autoUpdateTime" json:"updated_at"`
 }
 
-type MovieMiners struct {
-	MoviesID uint `json:"movies_id,omitempty"`
-	MinersID uint `json:"miner_id,omitempty"`
+type MovieUser struct {
+	MovieID uint `json:"movie_id,omitempty"`
+	UserID  uint `json:"user_id,omitempty"`
 }

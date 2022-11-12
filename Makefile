@@ -1,4 +1,4 @@
-.PHONY: lillybox clean all test build
+.PHONY: gemstone clean all test build
 
 BUILD_DIR = build
 
@@ -9,7 +9,7 @@ BUILD_OUTPUT = gemstoned
 all: build
 
 build:
-	@echo "\033[92mBuild batch daemon...\033[0m"
+	@echo "\033[92mBuild gemstone daemon...\033[0m"
 	@go build -o $(BUILD_DIR)/$(BUILD_OUTPUT) $(BUILD_TARGET)
 
 clean:
