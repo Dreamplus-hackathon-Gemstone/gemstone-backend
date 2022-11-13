@@ -114,11 +114,31 @@ definitions:
       success:
         type: boolean
     type: object
+  global.FindMovieByGenreRes:
+    properties:
+      err: {}
+      movies:
+        items:
+          $ref: '#/definitions/domain.Movie'
+        type: array
+      success:
+        type: boolean
+    type: object
   global.FindMovieRes:
     properties:
       err: {}
       movie:
         $ref: '#/definitions/domain.Movie'
+      success:
+        type: boolean
+    type: object
+  global.FindProposalByGenreRes:
+    properties:
+      err: {}
+      proposals:
+        items:
+          $ref: '#/definitions/domain.Proposal'
+        type: array
       success:
         type: boolean
     type: object
@@ -157,6 +177,17 @@ definitions:
         type: string
     type: object
   global.RegisterRes:
+    properties:
+      err: {}
+      success:
+        type: boolean
+    type: object
+  global.StoreGenreReq:
+    properties:
+      genre_type:
+        type: string
+    type: object
+  global.StoreGenreRes:
     properties:
       err: {}
       success:
@@ -349,6 +380,92 @@ paths:
       summary: Verify User Nickname
       tags:
       - auth
+  /api/v1/genre/create:
+    post:
+      consumes:
+      - application/json
+      description: 테스트용 API 입니다.
+      parameters:
+      - description: Store Req
+        in: body
+        name: StoreGenreReq
+        required: true
+        schema:
+          $ref: '#/definitions/global.StoreGenreReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/global.StoreGenreRes'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/global.StoreGenreRes'
+      summary: Store Genre
+      tags:
+      - genre
+  /api/v1/genre/movie:
+    get:
+      consumes:
+      - application/json
+      description: Genre 별 Movie 조회합니다. Offset 받을 수 있고, Limit 20으로 고정입니다.
+      parameters:
+      - description: Offset
+        in: query
+        name: offset
+        required: true
+        type: string
+      - description: GenreID
+        in: query
+        name: genreId
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/global.FindMovieByGenreRes'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/global.FindMovieByGenreRes'
+      summary: Find Movie By Genre ID
+      tags:
+      - genre
+  /api/v1/genre/proposal:
+    get:
+      consumes:
+      - application/json
+      description: Genre 별 Proposal 조회합니다. Offset 받을 수 있고, Limit 20으로 고정입니다.
+      parameters:
+      - description: Offset
+        in: query
+        name: offset
+        required: true
+        type: string
+      - description: GenreID
+        in: query
+        name: genreId
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/global.FindProposalByGenreRes'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/global.FindProposalByGenreRes'
+      summary: Find Proposal By Genre ID
+      tags:
+      - genre
   /api/v1/movie:
     get:
       consumes:

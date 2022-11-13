@@ -28,3 +28,9 @@ type IMovieService interface {
 	FindMany(param FindManyMovieReq) (ret FindManyMovieRes)
 	Store(param StoreMovieReq) (ret StoreMovieRes)
 }
+
+type IGenreService interface {
+	FindMovie(param FindMovieByGenreReq) (ret FindMovieByGenreRes)
+	FindProposal(param FindProposalByGenreReq) (ret FindProposalByGenreRes)
+	Store(param StoreGenreReq) (ret StoreGenreRes)
+}

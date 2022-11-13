@@ -27,3 +27,9 @@ type IProposalHandler interface {
 	Update(c *fiber.Ctx) error
 	Delete(c *fiber.Ctx) error
 }
+
+type IGenreHandler interface {
+	FindMovieByGenre(c *fiber.Ctx) error
+	FindProposalByGenre(c *fiber.Ctx) error
+	Store(c *fiber.Ctx) error
+}

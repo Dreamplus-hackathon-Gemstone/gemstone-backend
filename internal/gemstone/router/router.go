@@ -29,4 +29,9 @@ func SetRouter(router fiber.Router, handler *handler.Handler) {
 	movieRouter.Get("/", handler.MovieHandler.FindMany)
 	movieRouter.Get("/:cid", handler.MovieHandler.Find)
 	movieRouter.Post("/create", handler.MovieHandler.Store)
+
+	genreRouter := router.Group("/genre")
+	genreRouter.Get("/proposal", handler.GenreHandler.FindProposalByGenre)
+	genreRouter.Get("/movie", handler.GenreHandler.FindMovieByGenre)
+	genreRouter.Post("/create", handler.GenreHandler.Store)
 }

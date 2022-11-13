@@ -175,6 +175,136 @@
                 }
             }
         },
+        "/api/v1/genre/create": {
+            "post": {
+                "description": "테스트용 API 입니다.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "genre"
+                ],
+                "summary": "Store Genre",
+                "parameters": [
+                    {
+                        "description": "Store Req",
+                        "name": "StoreGenreReq",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/global.StoreGenreReq"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/global.StoreGenreRes"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/global.StoreGenreRes"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/genre/movie": {
+            "get": {
+                "description": "Genre 별 Movie 조회합니다. Offset 받을 수 있고, Limit 20으로 고정입니다.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "genre"
+                ],
+                "summary": "Find Movie By Genre ID",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Offset",
+                        "name": "offset",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "GenreID",
+                        "name": "genreId",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/global.FindMovieByGenreRes"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/global.FindMovieByGenreRes"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/genre/proposal": {
+            "get": {
+                "description": "Genre 별 Proposal 조회합니다. Offset 받을 수 있고, Limit 20으로 고정입니다.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "genre"
+                ],
+                "summary": "Find Proposal By Genre ID",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Offset",
+                        "name": "offset",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "GenreID",
+                        "name": "genreId",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/global.FindProposalByGenreRes"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/global.FindProposalByGenreRes"
+                        }
+                    }
+                }
+            }
+        },
         "/api/v1/movie": {
             "get": {
                 "description": "Movie 조회합니다. Offset 받을 수 있고, Limit 20으로 고정입니다.",
@@ -582,12 +712,42 @@
                 }
             }
         },
+        "global.FindMovieByGenreRes": {
+            "type": "object",
+            "properties": {
+                "err": {},
+                "movies": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/domain.Movie"
+                    }
+                },
+                "success": {
+                    "type": "boolean"
+                }
+            }
+        },
         "global.FindMovieRes": {
             "type": "object",
             "properties": {
                 "err": {},
                 "movie": {
                     "$ref": "#/definitions/domain.Movie"
+                },
+                "success": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "global.FindProposalByGenreRes": {
+            "type": "object",
+            "properties": {
+                "err": {},
+                "proposals": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/domain.Proposal"
+                    }
                 },
                 "success": {
                     "type": "boolean"
@@ -647,6 +807,23 @@
             }
         },
         "global.RegisterRes": {
+            "type": "object",
+            "properties": {
+                "err": {},
+                "success": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "global.StoreGenreReq": {
+            "type": "object",
+            "properties": {
+                "genre_type": {
+                    "type": "string"
+                }
+            }
+        },
+        "global.StoreGenreRes": {
             "type": "object",
             "properties": {
                 "err": {},

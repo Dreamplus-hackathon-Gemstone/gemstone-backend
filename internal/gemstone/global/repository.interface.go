@@ -9,8 +9,9 @@ type IRepository interface {
 }
 
 type IGenreRepo interface {
-	FindByGenre(param Parameter) (ret ReturnType)
-	Store(param Parameter) (ret ReturnType)
+	FindMovieByGenre(param FindMovieByGenreReq) (ret FindMovieByGenreRes)
+	FindProposalByGenre(param FindProposalByGenreReq) (ret FindProposalByGenreRes)
+	Store(param StoreGenreReq) (ret StoreGenreRes)
 }
 
 type IUserRepo interface {
