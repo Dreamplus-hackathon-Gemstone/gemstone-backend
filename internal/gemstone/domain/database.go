@@ -44,7 +44,7 @@ func NewClient(config *config.Config) *gorm.DB {
 	//_ = client.Migrator().DropTable(&Proposal{})
 	//_ = client.Migrator().DropTable(&User{})
 	//_ = client.Migrator().DropTable(&Tokens{})
-	//_ = client.Migrator().DropTable(&Movie{})
+	//_ = client.Migrator().DropTable(&Proposal{})
 	//_ = client.Migrator().DropTable(&MovieUser{})
 	//_ = client.Migrator().DropTable(&ProposalUser{})
 
@@ -58,7 +58,7 @@ func NewClient(config *config.Config) *gorm.DB {
 	log.Printf("Create table User ... err : %v\n", err)
 
 	err = client.Migrator().CreateTable(&Movie{})
-	log.Printf("Create table Movie ... err : %v\n", err)
+	log.Printf("Create table Proposals ... err : %v\n", err)
 
 	err = client.Migrator().CreateTable(&Proposal{})
 	log.Printf("Create table Proposal ... err : %v\n", err)

@@ -2,7 +2,7 @@ package global
 
 type IRepository interface {
 	Find(param Parameter) (ret ReturnType)
-	FindAll(param Parameter) (ret ReturnType)
+	FindMany(param Parameter) (ret ReturnType)
 	Store(param Parameter) (ret ReturnType)
 	Update(param Parameter) (ret ReturnType)
 	Delete(param Parameter) (ret ReturnType)
@@ -21,16 +21,16 @@ type IUserRepo interface {
 }
 
 type IProposalRepo interface {
-	FindByContentID(account Parameter) (ret ReturnType)
-	FindMany(param FindManyReq) (ret FindManyProposalRes)
-	Store(param Parameter) (ret ReturnType)
-	Update(param Parameter) (ret ReturnType)
-	Delete(param Parameter) (ret ReturnType)
+	FindByContentID(param FindProposalReq) (ret FindProposalRes)
+	FindMany(param FindManyProposalReq) (ret FindManyProposalRes)
+	Store(param StoreProposalReq) (ret StoreProposalRes)
+	Update(param UpdateProposalReq) (ret UpdateProposalRes)
+	Delete(param DeleteProposalReq) (ret DeleteProposalRes)
 }
 
 type IMovieRepo interface {
 	Find(param FindItemReq) (ret FindMovieRes)
-	FindMany(param FindManyReq) (ret ReturnType)
+	FindMany(param FindManyProposalReq) (ret ReturnType)
 	Store(param Parameter) (ret ReturnType)
 	Update(param Parameter) (ret ReturnType)
 	Delete(param Parameter) (ret ReturnType)

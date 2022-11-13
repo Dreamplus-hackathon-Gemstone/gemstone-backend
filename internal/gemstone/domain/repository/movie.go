@@ -18,7 +18,7 @@ func (m *MovieRepo) Find(account global.FindItemReq) (ret global.FindMovieRes) {
 	panic("implement me")
 }
 
-func (m *MovieRepo) FindMany(param global.FindManyReq) (ret global.ReturnType) {
+func (m *MovieRepo) FindMany(param global.FindManyProposalReq) (ret global.ReturnType) {
 	//TODO implement me
 	panic("implement me")
 }

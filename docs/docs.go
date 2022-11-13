@@ -181,9 +181,295 @@ const docTemplate = `{
                     }
                 }
             }
+        },
+        "/api/v1/proposal": {
+            "get": {
+                "description": "Proposal 조회합니다. Offset 받을 수 있고, Limit 20으로 고정입니다.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "proposal"
+                ],
+                "summary": "Find Many Proposal",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Offset",
+                        "name": "offset",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/global.FindManyProposalRes"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/global.FindManyProposalRes"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/proposal/store": {
+            "post": {
+                "description": "테스트용 API 입니다. Polling 혹은 Listen 시스템 제작 시 삭제 예정입니다.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "proposal"
+                ],
+                "summary": "Store Proposal",
+                "parameters": [
+                    {
+                        "description": "Store Req",
+                        "name": "StoreProposalReq",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/global.StoreProposalReq"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/global.StoreProposalRes"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/global.StoreProposalRes"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/proposal/{cid}": {
+            "get": {
+                "description": "Proposal 세부 정보를 조회합니다.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "proposal"
+                ],
+                "summary": "Find Single Proposal",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "ContentID",
+                        "name": "cid",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/global.FindProposalRes"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/global.FindProposalRes"
+                        }
+                    }
+                }
+            }
         }
     },
     "definitions": {
+        "domain.Movie": {
+            "type": "object",
+            "properties": {
+                "content_id": {
+                    "type": "string"
+                },
+                "created_at": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "genre_id": {
+                    "type": "integer"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "maker_id": {
+                    "type": "integer"
+                },
+                "miners": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/domain.User"
+                    }
+                },
+                "movie_uri": {
+                    "type": "string"
+                },
+                "thumbnail_uri": {
+                    "type": "string"
+                },
+                "updated_at": {
+                    "type": "string"
+                }
+            }
+        },
+        "domain.Proposal": {
+            "type": "object",
+            "properties": {
+                "content_id": {
+                    "type": "string"
+                },
+                "created_at": {
+                    "type": "string"
+                },
+                "deadline": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "document_uri": {
+                    "type": "string"
+                },
+                "estimated_production_time": {
+                    "type": "string"
+                },
+                "expected_release_year": {
+                    "type": "string"
+                },
+                "genre_id": {
+                    "type": "integer"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "maker_id": {
+                    "type": "integer"
+                },
+                "miners": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/domain.User"
+                    }
+                },
+                "target_price": {
+                    "type": "integer"
+                },
+                "thumbnail_uri": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "updated_at": {
+                    "type": "string"
+                }
+            }
+        },
+        "domain.User": {
+            "type": "object",
+            "properties": {
+                "account": {
+                    "type": "string"
+                },
+                "created_at": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "movie": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/domain.Movie"
+                    }
+                },
+                "movies": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/domain.Movie"
+                    }
+                },
+                "name": {
+                    "type": "string"
+                },
+                "nickname": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                },
+                "proposal": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/domain.Proposal"
+                    }
+                },
+                "proposals": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/domain.Proposal"
+                    }
+                },
+                "updated_at": {
+                    "type": "string"
+                }
+            }
+        },
+        "global.FindManyProposalRes": {
+            "type": "object",
+            "properties": {
+                "proposals": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/domain.Proposal"
+                    }
+                },
+                "success": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "global.FindProposalRes": {
+            "type": "object",
+            "properties": {
+                "err": {},
+                "proposal": {
+                    "$ref": "#/definitions/domain.Proposal"
+                },
+                "success": {
+                    "type": "boolean"
+                }
+            }
+        },
         "global.LoginReq": {
             "type": "object",
             "properties": {
@@ -225,6 +511,53 @@ const docTemplate = `{
             }
         },
         "global.RegisterRes": {
+            "type": "object",
+            "properties": {
+                "err": {},
+                "success": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "global.StoreProposalReq": {
+            "type": "object",
+            "properties": {
+                "content_id": {
+                    "type": "string"
+                },
+                "deadline": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "document_uri": {
+                    "type": "string"
+                },
+                "estimated_production_time": {
+                    "type": "string"
+                },
+                "expected_release_year": {
+                    "type": "string"
+                },
+                "genre_id": {
+                    "type": "integer"
+                },
+                "maker_id": {
+                    "type": "integer"
+                },
+                "target_price": {
+                    "type": "integer"
+                },
+                "thumbnail_uri": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                }
+            }
+        },
+        "global.StoreProposalRes": {
             "type": "object",
             "properties": {
                 "err": {},
