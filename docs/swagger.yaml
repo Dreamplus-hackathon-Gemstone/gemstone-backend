@@ -95,12 +95,30 @@ definitions:
       updated_at:
         type: string
     type: object
+  global.FindManyMovieRes:
+    properties:
+      err: {}
+      movies:
+        items:
+          $ref: '#/definitions/domain.Movie'
+        type: array
+      success:
+        type: boolean
+    type: object
   global.FindManyProposalRes:
     properties:
       proposals:
         items:
           $ref: '#/definitions/domain.Proposal'
         type: array
+      success:
+        type: boolean
+    type: object
+  global.FindMovieRes:
+    properties:
+      err: {}
+      movie:
+        $ref: '#/definitions/domain.Movie'
       success:
         type: boolean
     type: object
@@ -139,6 +157,27 @@ definitions:
         type: string
     type: object
   global.RegisterRes:
+    properties:
+      err: {}
+      success:
+        type: boolean
+    type: object
+  global.StoreMovieReq:
+    properties:
+      content_id:
+        type: string
+      description:
+        type: string
+      genre_id:
+        type: integer
+      maker_id:
+        type: integer
+      movie_uri:
+        type: string
+      thumbnail_uri:
+        type: string
+    type: object
+  global.StoreMovieRes:
     properties:
       err: {}
       success:
@@ -310,6 +349,82 @@ paths:
       summary: Verify User Nickname
       tags:
       - auth
+  /api/v1/movie:
+    get:
+      consumes:
+      - application/json
+      description: Movie 조회합니다. Offset 받을 수 있고, Limit 20으로 고정입니다.
+      parameters:
+      - description: Offset
+        in: query
+        name: offset
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/global.FindManyMovieRes'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/global.FindManyMovieRes'
+      summary: Find Many Movie
+      tags:
+      - movie
+  /api/v1/movie/{cid}:
+    get:
+      consumes:
+      - application/json
+      description: Movie 세부 정보를 조회합니다.
+      parameters:
+      - description: ContentID
+        in: path
+        name: cid
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/global.FindMovieRes'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/global.FindMovieRes'
+      summary: Find Single Movie
+      tags:
+      - movie
+  /api/v1/movie/create:
+    post:
+      consumes:
+      - application/json
+      description: 테스트용 API 입니다. Polling 혹은 Listen 시스템 제작 시 삭제 예정입니다.
+      parameters:
+      - description: Store Req
+        in: body
+        name: StoreMovieReq
+        required: true
+        schema:
+          $ref: '#/definitions/global.StoreMovieReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/global.StoreMovieRes'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/global.StoreMovieRes'
+      summary: Store Movie
+      tags:
+      - movie
   /api/v1/proposal:
     get:
       consumes:

@@ -18,8 +18,6 @@ type IMovieHandler interface {
 	Find(c *fiber.Ctx) error
 	FindMany(c *fiber.Ctx) error
 	Store(c *fiber.Ctx) error
-	Update(c *fiber.Ctx) error
-	Delete(c *fiber.Ctx) error
 }
 
 type IProposalHandler interface {

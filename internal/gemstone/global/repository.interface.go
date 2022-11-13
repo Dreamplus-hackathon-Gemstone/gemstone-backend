@@ -29,11 +29,9 @@ type IProposalRepo interface {
 }
 
 type IMovieRepo interface {
-	Find(param FindItemReq) (ret FindMovieRes)
-	FindMany(param FindManyProposalReq) (ret ReturnType)
-	Store(param Parameter) (ret ReturnType)
-	Update(param Parameter) (ret ReturnType)
-	Delete(param Parameter) (ret ReturnType)
+	FindByContentID(param FindMovieReq) (ret FindMovieRes)
+	FindMany(param FindManyMovieReq) (ret FindManyMovieRes)
+	Store(param StoreMovieReq) (ret StoreMovieRes)
 }
 
 type ITokenRepo interface {

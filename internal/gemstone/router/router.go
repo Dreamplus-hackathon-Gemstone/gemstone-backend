@@ -24,4 +24,9 @@ func SetRouter(router fiber.Router, handler *handler.Handler) {
 	proposalRouter.Post("/create", handler.ProposalHandler.Store)
 	proposalRouter.Patch("/update", handler.ProposalHandler.Update)
 	proposalRouter.Delete("/delete", handler.ProposalHandler.Delete)
+
+	movieRouter := router.Group("/movie")
+	movieRouter.Get("/", handler.MovieHandler.FindMany)
+	movieRouter.Get("/:cid", handler.MovieHandler.Find)
+	movieRouter.Post("/create", handler.MovieHandler.Store)
 }

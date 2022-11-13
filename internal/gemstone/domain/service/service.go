@@ -8,10 +8,12 @@ import (
 type Service struct {
 	UserService     global.IUserService
 	ProposalService global.IProposalService
+	MovieService    global.IMovieService
 }
 
 func NewService(repo *repository.Repository) *Service {
 	user := NewUserService(repo.UserRepo)
 	proposal := NewProposalService(repo.ProposalRepo)
-	return &Service{UserService: user, ProposalService: proposal}
+	movie := NewMovieService(repo.MovieRepo)
+	return &Service{UserService: user, ProposalService: proposal, MovieService: movie}
 }

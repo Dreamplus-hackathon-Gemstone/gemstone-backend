@@ -182,6 +182,122 @@ const docTemplate = `{
                 }
             }
         },
+        "/api/v1/movie": {
+            "get": {
+                "description": "Movie 조회합니다. Offset 받을 수 있고, Limit 20으로 고정입니다.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "movie"
+                ],
+                "summary": "Find Many Movie",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Offset",
+                        "name": "offset",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/global.FindManyMovieRes"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/global.FindManyMovieRes"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/movie/create": {
+            "post": {
+                "description": "테스트용 API 입니다. Polling 혹은 Listen 시스템 제작 시 삭제 예정입니다.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "movie"
+                ],
+                "summary": "Store Movie",
+                "parameters": [
+                    {
+                        "description": "Store Req",
+                        "name": "StoreMovieReq",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/global.StoreMovieReq"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/global.StoreMovieRes"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/global.StoreMovieRes"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/movie/{cid}": {
+            "get": {
+                "description": "Movie 세부 정보를 조회합니다.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "movie"
+                ],
+                "summary": "Find Single Movie",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "ContentID",
+                        "name": "cid",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/global.FindMovieRes"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/global.FindMovieRes"
+                        }
+                    }
+                }
+            }
+        },
         "/api/v1/proposal": {
             "get": {
                 "description": "Proposal 조회합니다. Offset 받을 수 있고, Limit 20으로 고정입니다.",
@@ -444,6 +560,21 @@ const docTemplate = `{
                 }
             }
         },
+        "global.FindManyMovieRes": {
+            "type": "object",
+            "properties": {
+                "err": {},
+                "movies": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/domain.Movie"
+                    }
+                },
+                "success": {
+                    "type": "boolean"
+                }
+            }
+        },
         "global.FindManyProposalRes": {
             "type": "object",
             "properties": {
@@ -452,6 +583,18 @@ const docTemplate = `{
                     "items": {
                         "$ref": "#/definitions/domain.Proposal"
                     }
+                },
+                "success": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "global.FindMovieRes": {
+            "type": "object",
+            "properties": {
+                "err": {},
+                "movie": {
+                    "$ref": "#/definitions/domain.Movie"
                 },
                 "success": {
                     "type": "boolean"
@@ -511,6 +654,38 @@ const docTemplate = `{
             }
         },
         "global.RegisterRes": {
+            "type": "object",
+            "properties": {
+                "err": {},
+                "success": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "global.StoreMovieReq": {
+            "type": "object",
+            "properties": {
+                "content_id": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "genre_id": {
+                    "type": "integer"
+                },
+                "maker_id": {
+                    "type": "integer"
+                },
+                "movie_uri": {
+                    "type": "string"
+                },
+                "thumbnail_uri": {
+                    "type": "string"
+                }
+            }
+        },
+        "global.StoreMovieRes": {
             "type": "object",
             "properties": {
                 "err": {},
