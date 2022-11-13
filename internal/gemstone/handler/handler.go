@@ -9,14 +9,20 @@ import (
 type Handler struct {
 	UserHandler     global.IUserHandler
 	ProposalHandler global.IProposalHandler
+	MovieHandler    global.IMovieHandler
+	GenreHandler    global.IGenreHandler
 }
 
 func NewHandler(svc *service.Service) *Handler {
 	user := NewUserHandler(svc.UserService)
 	proposal := NewProposalHandler(svc.ProposalService)
+	movie := NewMovieHandler(svc.MovieService)
+	genre := NewGenreHandler(svc.GenreService)
 	return &Handler{
 		UserHandler:     user,
 		ProposalHandler: proposal,
+		MovieHandler:    movie,
+		GenreHandler:    genre,
 	}
 }
 

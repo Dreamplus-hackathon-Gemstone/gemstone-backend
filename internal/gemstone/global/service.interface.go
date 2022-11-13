@@ -22,3 +22,15 @@ type IProposalService interface {
 	Update(param UpdateProposalReq) (ret UpdateProposalRes)
 	Delete(param DeleteProposalReq) (ret DeleteProposalRes)
 }
+
+type IMovieService interface {
+	FindByContentID(param FindMovieReq) (ret FindMovieRes)
+	FindMany(param FindManyMovieReq) (ret FindManyMovieRes)
+	Store(param StoreMovieReq) (ret StoreMovieRes)
+}
+
+type IGenreService interface {
+	FindMovie(param FindMovieByGenreReq) (ret FindMovieByGenreRes)
+	FindProposal(param FindProposalByGenreReq) (ret FindProposalByGenreRes)
+	Store(param StoreGenreReq) (ret StoreGenreRes)
+}

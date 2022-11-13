@@ -9,8 +9,9 @@ type IRepository interface {
 }
 
 type IGenreRepo interface {
-	FindByGenre(param Parameter) (ret ReturnType)
-	Store(param Parameter) (ret ReturnType)
+	FindMovieByGenre(param FindMovieByGenreReq) (ret FindMovieByGenreRes)
+	FindProposalByGenre(param FindProposalByGenreReq) (ret FindProposalByGenreRes)
+	Store(param StoreGenreReq) (ret StoreGenreRes)
 }
 
 type IUserRepo interface {
@@ -29,11 +30,9 @@ type IProposalRepo interface {
 }
 
 type IMovieRepo interface {
-	Find(param FindItemReq) (ret FindMovieRes)
-	FindMany(param FindManyProposalReq) (ret ReturnType)
-	Store(param Parameter) (ret ReturnType)
-	Update(param Parameter) (ret ReturnType)
-	Delete(param Parameter) (ret ReturnType)
+	FindByContentID(param FindMovieReq) (ret FindMovieRes)
+	FindMany(param FindManyMovieReq) (ret FindManyMovieRes)
+	Store(param StoreMovieReq) (ret StoreMovieRes)
 }
 
 type ITokenRepo interface {
