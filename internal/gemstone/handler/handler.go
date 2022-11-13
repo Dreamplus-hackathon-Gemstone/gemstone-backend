@@ -7,12 +7,17 @@ import (
 )
 
 type Handler struct {
-	UserHandler global.IUserHandler
+	UserHandler     global.IUserHandler
+	ProposalHandler global.IProposalHandler
 }
 
 func NewHandler(svc *service.Service) *Handler {
 	user := NewUserHandler(svc.UserService)
-	return &Handler{user}
+	proposal := NewProposalHandler(svc.ProposalService)
+	return &Handler{
+		UserHandler:     user,
+		ProposalHandler: proposal,
+	}
 }
 
 func (h *Handler) Ping(c *fiber.Ctx) error {
